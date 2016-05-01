@@ -30,40 +30,40 @@ I use their classes VLCMedia and VLCMediaList in order to browse the network for
 <br />
 **How to Run**<br />
 **----------**<br />
-1. download this project
-2. open the SMBDriver.xcodeproj file in xCode
-3. select the active scheme and device/simulator from the available schemas
-4. this project uses the TVVLCKit but you can download or compile the libDSM.a and libtasn1.a
-5. in the "SMBDriver.m" class, at the "testRead" and "testWrite" methods - set your relevant values for the computer/share/user/password/file
-6. run the project and it should write debug lines to the console the steps it succeeded or on what it failed
+1. download this project<br />
+2. open the SMBDriver.xcodeproj file in xCode<br />
+3. select the active scheme and device/simulator from the available schemas<br />
+4. this project uses the TVVLCKit but you can download or compile the libDSM.a and libtasn1.a<br />
+5. in the "SMBDriver.m" class, at the "testRead" and "testWrite" methods - set your relevant values for the computer/share/user/password/file<br />
+6. run the project and it should write debug lines to the console the steps it succeeded or on what it failed<br />
 <br />
 in your project you can execute this project from Objective-C class or from swift using the bridge header<br />
 <br />
 <br />
 **How to add this feature to your project**<br />
 **---------------------------------------**<br />
-1. add the lib folder (includes the .h interfaces for the required libs), you can exclude the TVVLCKit folder if you decide not to use it
-2. add the compiled or downloaded libDSM.a and libtasn1.a to your project or if you decide to use TVVLCKit then you can simply do the same with TVVLCKit.a or TVVLCKit.framework (usually under folder called "framework")
-3. make sure your added "framework" folder appears in xcode project file -> target -> "Build Settings" -> "Search Paths" -> "Library Search Paths" -> add entry which includes the value: "$(PROJECT_DIR)/SMBDriver/frameworks" (replace SMBDriver with your own project name) like in the following image
+1. add the lib folder (includes the .h interfaces for the required libs), you can exclude the TVVLCKit folder if you decide not to use it<br />
+2. add the compiled or downloaded libDSM.a and libtasn1.a to your project or if you decide to use TVVLCKit then you can simply do the same with TVVLCKit.a or TVVLCKit.framework (usually under folder called "framework")<br />
+3. make sure your added "framework" folder appears in xcode project file -> target -> "Build Settings" -> "Search Paths" -> "Library Search Paths" -> add entry which includes the value: "$(PROJECT_DIR)/SMBDriver/frameworks" (replace SMBDriver with your own project name) like in the following image<br />
  <br />
 <p align="center">
   <img src="readmefolder/image3.png" width="600"/>
 </p>
 <br />
-4. in xcode in your project's target under "General" -> "Linked Framework and Libraries" -> add the relevant ".a" or ".framework" files (ether the TVVLCKit.a or the TVVLCKit.framework or both: libDSM.a and libtasn1.a) and also add "libiconv.tbd" from the tvOS libraries, like in the following image:
+4. in xcode in your project's target under "General" -> "Linked Framework and Libraries" -> add the relevant ".a" or ".framework" files (ether the TVVLCKit.a or the TVVLCKit.framework or both: libDSM.a and libtasn1.a) and also add "libiconv.tbd" from the tvOS libraries, like in the following image:<br />
  <br />
 <p align="center">
   <img src="readmefolder/image1.png" width="600"/>
 </p>
 <br />
-5. in xcode in your project's target under "Build Settings" -> "Search Paths" -> "Header Search Paths" -> add entry which includes the value: "$(PROJECT_DIR)/SMBDriver/libs" (replace SMBDriver with your own project name) like in the following image
+5. in xcode in your project's target under "Build Settings" -> "Search Paths" -> "Header Search Paths" -> add entry which includes the value: "$(PROJECT_DIR)/SMBDriver/libs" (replace SMBDriver with your own project name) like in the following image<br />
  <br />
 <p align="center">
   <img src="readmefolder/image2.png" width="600"/>
 </p>
 <br />
-6. copy the folder "smb" and add it to your source tree
-7. add the appropriate code (based on your language of choice), see the code examples, or use the test methods.
+6. copy the folder "smb" and add it to your source tree<br />
+7. add the appropriate code (based on your language of choice), see the code examples, or use the test methods.<br />
 <br />
 <br />
 **Code Examples:**<br />
