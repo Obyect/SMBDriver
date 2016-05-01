@@ -143,6 +143,12 @@ in your project you can execute this project from Objective-C class or from swif
 ####run the test methods:
 ```swift
         
+        // init the SMBDriver
+        let smbDriver: SMBDriver = SMBDriver()
+        
+        // set debug mode to true
+        smbDriver.debug = true
+        
         // run the write test method
         smbDriver.testWrite()
         
