@@ -3,31 +3,31 @@
 
 **About**
 **-----**
-This project uses VideoLabs - libDSM open source project that allows SMB/XSMB/Samba C interface, and the libTASN1 GNU project,
-link to the libDSM Git: https://github.com/videolabs/libdsm
-link to the libTASN1 project page: https://www.gnu.org/software/libtasn1
-
-i used TVVLCKit instead of compiling the libDSM and libTASN1 (since i use it in my projects),
-link to the TVVLCKit Git: https://code.videolan.org/videolan/VLCKit
-
-The Objective C class allows read and write text files (only text files!) of files residing on SMB / xSMB / Samba share drives.
-
-you can compile and run on AppleTV but it should be able to adjust easelly to any other iDevice like: iPhone / iPad...
-
-the class is equipped with test methods to test drive the actual infrastructure methods and supply a usage example to get you started faster.
-
-code is fully documented with remarks, read them - they will help you better understand the code in case of failure or bugs.
-
-
+This project uses VideoLabs - libDSM open source project that allows SMB/XSMB/Samba C interface, and the libTASN1 GNU project,<br />
+link to the libDSM Git: https://github.com/videolabs/libdsm<br />
+link to the libTASN1 project page: https://www.gnu.org/software/libtasn1<br />
+<br />
+i used TVVLCKit instead of compiling the libDSM and libTASN1 (since i use it in my projects),<br />
+link to the TVVLCKit Git: https://code.videolan.org/videolan/VLCKit<br />
+<br />
+The Objective C class allows read and write text files (only text files!) of files residing on SMB / xSMB / Samba share drives.<br />
+<br />
+you can compile and run on AppleTV but it should be able to adjust easelly to any other iDevice like: iPhone / iPad...<br />
+<br />
+the class is equipped with test methods to test drive the actual infrastructure methods and supply a usage example to get you started faster.<br />
+<br />
+code is fully documented with remarks, read them - they will help you better understand the code in case of failure or bugs.<br />
+<br />
+<br />
 **what is required**
 **----------------**
-in order to compile and run this project, you need the libDSM.a and libtasn1.a compiled for your running environment (device / simulator / iPhone / Apple TV ...)
-
-In my project i use the TVVLCKit which is the VLCKit for Apple TV (although not made for these purposes, it includes both of these libs),
-
-I use their classes VLCMedia and VLCMediaList in order to browse the network for computers / share folder and browse through those folders, and stream media files to the iDevice, the only thing i was missing is text write and read interface, and this is what this project complete (i might implement the rest of the methods over time or based on requests).
-
-
+in order to compile and run this project, you need the libDSM.a and libtasn1.a compiled for your running environment (device / simulator / iPhone / Apple TV ...)<br />
+<br />
+In my project i use the TVVLCKit which is the VLCKit for Apple TV (although not made for these purposes, it includes both of these libs),<br />
+<br />
+I use their classes VLCMedia and VLCMediaList in order to browse the network for computers / share folder and browse through those folders, and stream media files to the iDevice, the only thing i was missing is text write and read interface, and this is what this project complete (i might implement the rest of the methods over time or based on requests).<br />
+<br />
+<br />
 **How to Run**
 **----------**
 1. download this project
@@ -36,41 +36,41 @@ I use their classes VLCMedia and VLCMediaList in order to browse the network for
 4. this project uses the TVVLCKit but you can download or compile the libDSM.a and libtasn1.a
 5. in the "SMBDriver.m" class, at the "testRead" and "testWrite" methods - set your relevant values for the computer/share/user/password/file
 6. run the project and it should write debug lines to the console the steps it succeeded or on what it failed
- 
-in your project you can execute this project from Objective-C class or from swift using the bridge header
-
-
+<br />
+in your project you can execute this project from Objective-C class or from swift using the bridge header<br />
+<br />
+<br />
 **How to add this feature to your project**
 **---------------------------------------**
 1. add the lib folder (includes the .h interfaces for the required libs), you can exclude the TVVLCKit folder if you decide not to use it
 2. add the compiled or downloaded libDSM.a and libtasn1.a to your project or if you decide to use TVVLCKit then you can simply do the same with TVVLCKit.a or TVVLCKit.framework (usually under folder called "framework")
 3. make sure your added "framework" folder appears in xcode project file -> target -> "Build Settings" -> "Search Paths" -> "Library Search Paths" -> add entry which includes the value: "$(PROJECT_DIR)/SMBDriver/frameworks" (replace SMBDriver with your own project name) like in the following image
- 
+ <br />
 <p align="center">
   <img src="readmefolder/image3.png" width="600"/>
 </p>
-
+<br />
 4. in xcode in your project's target under "General" -> "Linked Framework and Libraries" -> add the relevant ".a" or ".framework" files (ether the TVVLCKit.a or the TVVLCKit.framework or both: libDSM.a and libtasn1.a) and also add "libiconv.tbd" from the tvOS libraries, like in the following image:
- 
+ <br />
 <p align="center">
   <img src="readmefolder/image1.png" width="600"/>
 </p>
-
+<br />
 5. in xcode in your project's target under "Build Settings" -> "Search Paths" -> "Header Search Paths" -> add entry which includes the value: "$(PROJECT_DIR)/SMBDriver/libs" (replace SMBDriver with your own project name) like in the following image
- 
+ <br />
 <p align="center">
   <img src="readmefolder/image2.png" width="600"/>
 </p>
-
+<br />
 6. copy the folder "smb" and add it to your source tree
 7. add the appropriate code (based on your language of choice), see the code examples, or use the test methods.
-
-
+<br />
+<br />
 **Code Examples:**
 **--------------**
-
+<br />
 ###Objective-C:
-
+<br />
 ####run the test methods:
 ```objective-c
     
@@ -87,7 +87,7 @@ in your project you can execute this project from Objective-C class or from swif
     [driver testRead];
     
 ```
-
+<br />
 ####Read a text file from an SMB share:
 ```objective-c
 
@@ -111,7 +111,7 @@ in your project you can execute this project from Objective-C class or from swif
     }
 
 ```
-
+<br />
 ####Write a string to text file over SMB:
 ```objective-c
 
@@ -136,10 +136,10 @@ in your project you can execute this project from Objective-C class or from swif
     }
     
 ```
-
-
+<br />
+<br />
 ###Swift:
-
+<br />
 ####run the test methods:
 ```swift
         
@@ -150,7 +150,7 @@ in your project you can execute this project from Objective-C class or from swif
         smbDriver.testRead()
         
 ```
-
+<br />
 ####Read a text file from an SMB share:
 ```swift
 
@@ -183,7 +183,7 @@ in your project you can execute this project from Objective-C class or from swif
         }
         
 ```
-
+<br />
 ####Write a string to text file over SMB:
 ```swift
         // variable to contain the write method returning value
@@ -222,5 +222,6 @@ in your project you can execute this project from Objective-C class or from swif
         }
 
 ```
-
-submit requests or bug report in the issues tab.
+<br />
+submit requests or bug report in the issues tab.<br />
+<br />
