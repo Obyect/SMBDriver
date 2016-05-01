@@ -1,8 +1,8 @@
 # SMBDriver
 
 
-** About **
-** ----- **
+**About**
+**-----**
 This project uses VideoLabs - libDSM open source project that allows SMB/XSMB/Samba C interface, and the libTASN1 GNU project,
 link to the libDSM Git: https://github.com/videolabs/libdsm
 link to the libTASN1 project page: https://www.gnu.org/software/libtasn1
@@ -19,8 +19,8 @@ the class is equipped with test methods to test drive the actual infrastructure 
 code is fully documented with remarks, read them - they will help you better understand the code in case of failure or bugs.
 
 
-** what is required **
-** ---------------- **
+**what is required**
+**----------------**
 in order to compile and run this project, you need the libDSM.a and libtasn1.a compiled for your running environment (device / simulator / iPhone / Apple TV ...)
 
 In my project i use the TVVLCKit which is the VLCKit for Apple TV (although not made for these purposes, it includes both of these libs),
@@ -28,8 +28,8 @@ In my project i use the TVVLCKit which is the VLCKit for Apple TV (although not 
 I use their classes VLCMedia and VLCMediaList in order to browse the network for computers / share folder and browse through those folders, and stream media files to the iDevice, the only thing i was missing is text write and read interface, and this is what this project complete (i might implement the rest of the methods over time or based on requests).
 
 
-** How to Run **
-** ---------- **
+**How to Run**
+**----------**
 1. download this project
 2. open the SMBDriver.xcodeproj file in xCode
 3. select the active scheme and device/simulator from the available schemas
@@ -40,8 +40,8 @@ I use their classes VLCMedia and VLCMediaList in order to browse the network for
 in your project you can execute this project from Objective-C class or from swift using the bridge header
 
 
-** How to add this feature to your project **
-** --------------------------------------- **
+**How to add this feature to your project**
+**---------------------------------------**
 1. add the lib folder (includes the .h interfaces for the required libs), you can exclude the TVVLCKit folder if you decide not to use it
 2. add the compiled or downloaded libDSM.a and libtasn1.a to your project or if you decide to use TVVLCKit then you can simply do the same with TVVLCKit.a or TVVLCKit.framework (usually under folder called "framework")
 3. make sure your added "framework" folder appears in xcode project file -> target -> "Build Settings" -> "Search Paths" -> "Library Search Paths" -> add entry which includes the value: "$(PROJECT_DIR)/SMBDriver/frameworks" (replace SMBDriver with your own project name) like in the following image
@@ -66,8 +66,8 @@ in your project you can execute this project from Objective-C class or from swif
 7. add the appropriate code (based on your language of choice), see the code examples, or use the test methods.
 
 
-** Code Examples: **
-** -------------- **
+**Code Examples:**
+**--------------**
 
 ###Objective-C:
 
