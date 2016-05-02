@@ -140,6 +140,7 @@
     
     // make sure the requested host is resolveable and fetch it's IP address, otherwise - return error code
     int resolveResult = netbios_ns_resolve(netbiosNameService, hostName, NETBIOS_FILESERVER, &ipAddress.sin_addr.s_addr);
+    
     if (resolveResult == 0)
     {
         // debug print
@@ -273,8 +274,14 @@
         }
     } while (bytesRead > 0);
     
-    // close the open file
+    // deallocation - close file
     smb_fclose(smbSession, fileDescriptor);
+    
+    // deallocation - close session
+    smb_session_destroy(smbSession);
+    
+    // deallocation - destroy the netbios service object since we don't need it anymore
+    netbios_ns_destroy(netbiosNameService);
     
     // return the read file as a string
     return fileContent;
@@ -355,6 +362,7 @@
     
     // make sure the requested host is resolveable and fetch it's IP address, otherwise - return error code
     int resolveResult = netbios_ns_resolve(netbiosNameService, hostName, NETBIOS_FILESERVER, &ipAddress.sin_addr.s_addr);
+    
     if (resolveResult == 0)
     {
         // debug print
@@ -537,7 +545,7 @@
         }
     } while (totalWrittenBytes < textLength && writtenBytes > 0);
     
-    // close the open file
+    // deallocation - close file
     smb_fclose(smbSession, fileDescriptor);
     
     int writeResult = -1;
@@ -560,6 +568,12 @@
         [self logLine:[NSString stringWithFormat:@"Successfully written bytes: %zd to file: %s\n", writtenBytes, fileNameAndPath]];
         writeResult = 0;
     }
+    
+    // deallocation - close session
+    smb_session_destroy(smbSession);
+    
+    // deallocation - destroy the netbios service object since we don't need it anymore
+    netbios_ns_destroy(netbiosNameService);
     
     return writeResult;
 }
