@@ -13,9 +13,9 @@
 		EAA851A61CD6A14E00A44500 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAA851A41CD6A14E00A44500 /* Main.storyboard */; };
 		EAA851A81CD6A14E00A44500 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAA851A71CD6A14E00A44500 /* Assets.xcassets */; };
 		EAA851C01CD6A1D700A44500 /* SMBDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA851BF1CD6A1D700A44500 /* SMBDriver.m */; };
-		EAA851C31CD6AECE00A44500 /* libTVVLCKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAA851C21CD6AECE00A44500 /* libTVVLCKit.a */; };
 		EAA851D11CD6B1B700A44500 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = EAA851D01CD6B1B700A44500 /* libiconv.tbd */; };
 		EAA851D71CD6B7AF00A44500 /* SwiftExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA851D61CD6B7AF00A44500 /* SwiftExample.swift */; };
+		EAA851F31CD8201700A44500 /* libTVVLCKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAA851DB1CD81EB600A44500 /* libTVVLCKit.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +41,6 @@
 		EAA851BC1CD6A1D700A44500 /* libtasn1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libtasn1.h; sourceTree = "<group>"; };
 		EAA851BE1CD6A1D700A44500 /* SMBDriver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMBDriver.h; sourceTree = "<group>"; };
 		EAA851BF1CD6A1D700A44500 /* SMBDriver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMBDriver.m; sourceTree = "<group>"; };
-		EAA851C21CD6AECE00A44500 /* libTVVLCKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTVVLCKit.a; sourceTree = "<group>"; };
 		EAA851C51CD6AEE600A44500 /* TVVLCKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVVLCKit.h; sourceTree = "<group>"; };
 		EAA851C61CD6AEE600A44500 /* VLCAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLCAudio.h; sourceTree = "<group>"; };
 		EAA851C71CD6AEE600A44500 /* VLCDialogProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLCDialogProvider.h; sourceTree = "<group>"; };
@@ -56,6 +55,9 @@
 		EAA851D01CD6B1B700A44500 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		EAA851D51CD6B7AF00A44500 /* SMBDriver-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SMBDriver-Bridging-Header.h"; sourceTree = "<group>"; };
 		EAA851D61CD6B7AF00A44500 /* SwiftExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftExample.swift; sourceTree = "<group>"; };
+		EAA851DB1CD81EB600A44500 /* libTVVLCKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTVVLCKit.a; sourceTree = "<group>"; };
+		EAA851DD1CD81EB600A44500 /* libTVVLCKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTVVLCKit.a; sourceTree = "<group>"; };
+		EAA851F21CD81EFB00A44500 /* SMBDriver copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "SMBDriver copy-Info.plist"; path = "/Users/ShayBC/Dropbox/dev/Work/SMBDriver/SMBDriver copy-Info.plist"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +66,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAA851D11CD6B1B700A44500 /* libiconv.tbd in Frameworks */,
-				EAA851C31CD6AECE00A44500 /* libTVVLCKit.a in Frameworks */,
+				EAA851F31CD8201700A44500 /* libTVVLCKit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +81,7 @@
 				EAA851AF1CD6A1D700A44500 /* libs */,
 				EAA851C11CD6AECE00A44500 /* frameworks */,
 				EAA851991CD6A14E00A44500 /* Products */,
+				EAA851F21CD81EFB00A44500 /* SMBDriver copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -164,8 +167,9 @@
 		EAA851C11CD6AECE00A44500 /* frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EAA851DA1CD81EB600A44500 /* simulator */,
+				EAA851DC1CD81EB600A44500 /* appletv */,
 				EAA851D01CD6B1B700A44500 /* libiconv.tbd */,
-				EAA851C21CD6AECE00A44500 /* libTVVLCKit.a */,
 			);
 			name = frameworks;
 			path = SMBDriver/frameworks;
@@ -187,6 +191,22 @@
 				EAA851CF1CD6AEE600A44500 /* VLCTime.h */,
 			);
 			path = TVVLCKit;
+			sourceTree = "<group>";
+		};
+		EAA851DA1CD81EB600A44500 /* simulator */ = {
+			isa = PBXGroup;
+			children = (
+				EAA851DB1CD81EB600A44500 /* libTVVLCKit.a */,
+			);
+			path = simulator;
+			sourceTree = "<group>";
+		};
+		EAA851DC1CD81EB600A44500 /* appletv */ = {
+			isa = PBXGroup;
+			children = (
+				EAA851DD1CD81EB600A44500 /* libTVVLCKit.a */,
+			);
+			path = appletv;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -376,7 +396,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/SMBDriver/frameworks",
+					"$(PROJECT_DIR)/SMBDriver/frameworks/simulator",
+					"$(PROJECT_DIR)/SMBDriver/frameworks/appletv",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.obyect.SMBDriver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -399,7 +420,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/SMBDriver/frameworks",
+					"$(PROJECT_DIR)/SMBDriver/frameworks/simulator",
+					"$(PROJECT_DIR)/SMBDriver/frameworks/appletv",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.obyect.SMBDriver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -426,6 +448,7 @@
 				EAA851AE1CD6A14E00A44500 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
