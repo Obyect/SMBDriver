@@ -18,7 +18,7 @@ the class is equipped with test methods to test drive the actual infrastructure 
 <br />
 code is fully documented with remarks, read them - they will help you better understand the code in case of failure or bugs.<br />
 <br />
-Note: this repository uses Git-LFS (Git Large File Storage),<br />
+###Note: this repository uses Git-LFS (Git Large File Storage),<br />
 unfortunatelly Git->Download Zip does not support git-lfs (https://github.com/github/git-lfs/issues/903)<br />
 in order to download the lib files do the following in terminal:<br />
 ```sh
