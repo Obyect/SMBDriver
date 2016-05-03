@@ -20,7 +20,7 @@ code is fully documented with remarks, read them - they will help you better und
 <br />
  <br />
 <p align="center">
-  <img src="readmefolder/image4.png" width="600"/>
+  <img src="readmefolder/image4.png" width="200"/>
 </p>
 <br />
 ###Note: this repository uses Git-LFS (Git Large File Storage),<br />
