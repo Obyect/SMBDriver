@@ -84,7 +84,7 @@ class MediaDiscoveryViewController: UIViewController
         // set debug mode to true
         smbDriver.debug = true
         
-        // set the connect data you would like to use while writing
+        // set the connect data you would like to use while reading
         let hostName: String = "MyPC"
         let userName: String = "test"
         let loginPassword: String = "1234"
@@ -93,14 +93,13 @@ class MediaDiscoveryViewController: UIViewController
         
         do
         {
-            // write a string to a text file on SMB share, if the file does not exists (and the user has write permissions) the file will be created
-            // if the file does exist - the file will be overwritten
+            // read a string from a text file on SMB share, if the file does not exists (and the user does not have read permissions) an error will be thrown
             fileContent = try smbDriver.readTextFileFromHost(hostName, withLogin: userName, withPassword: loginPassword, withFileName: fileNameAndPath, onShare: sharedFolder)
             NSLog("Successfully read file, here is its content:\n\(fileContent)")
         }
         catch
         {
-            NSLog("failed to write file content, errorCode: \((error as NSError).code), errorMessage: \((error as NSError).localizedDescription)");
+            NSLog("failed to read file content, errorCode: \((error as NSError).code), errorMessage: \((error as NSError).localizedDescription)");
         }
     }
 }
