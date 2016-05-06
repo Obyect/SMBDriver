@@ -202,7 +202,7 @@ in your project you can execute this project from Objective-C class or from swif
         }
         catch
         {
-            NSLog("failed to write file content, errorCode: \((error as NSError).code), errorMessage: \((error as NSError).localizedDescription)");
+            NSLog("failed to read file content, errorCode: \((error as NSError).code), errorMessage: \((error as NSError).localizedDescription)");
         }
         
 ```
