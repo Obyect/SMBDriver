@@ -78,6 +78,8 @@
  *         -3: failed login to host (using supplied user and guest)
  *         -4: failed to connect to share folder
  *         -5: failed to open requested file
+ *         -6: failed to get file's metadata (fileSize, isDirectory...)
+ *         -7: failed to read all the text from the file (usually network problems or broken file prevent read completion)
  * returns: NSString, NULL if error, if success - the file text content
  */
 -(NSString *) readTextFileFromHost:(NSString *)shareHostName
@@ -130,7 +132,7 @@
     smb_fd fileDescriptor;
     
     // variable to contain the current read bytes from opened file
-    char readBuffer[65535];
+    unichar readBuffer[65535];
     
     // variable to contain the end result file content as a string
     NSMutableString * fileContent = [NSMutableString string];
@@ -257,22 +259,87 @@
         return NULL;
     }
     
+    // fetch the file stat (file metadata information)
+    smb_stat fileStats = smb_stat_fd(smbSession, fileDescriptor);
+    
+    // if failed to fetch file stat, return error
+    uint64_t fileSize = 0;
+    if(fileStats != NULL)
+    {
+        // get the file current size
+        fileSize = smb_stat_get(fileStats, SMB_STAT_SIZE);
+        [self logLine:[NSString stringWithFormat:@"file size: %zd bytes", fileSize]];
+    }
+    else
+    {
+        // debug print
+        NSString * errorMessageString = [NSString stringWithFormat:@"Failed to get metadate of file: %s", fileNameAndPath];
+        [self logLine:errorMessageString];
+        
+        // return relevant error message
+        NSMutableDictionary* errorMessage = [NSMutableDictionary dictionary];
+        [errorMessage setValue:errorMessageString forKey:NSLocalizedDescriptionKey];
+        *error = [NSError errorWithDomain:@"SMBError" code:-6 userInfo:errorMessage];
+        return NULL;
+    }
+
+    
     // loop through the file's bytes and read them until there are no more bytes to read
     ssize_t bytesRead = 0; // variable to contain the total number of bytes read from opened file
+    ssize_t totalReadBytes = 0;
     do
     {
+        // set the file read currsor to the last byte read (totalReadBytes)
+        ssize_t currentFileSize = smb_fseek(smbSession, fileDescriptor, totalReadBytes, SMB_SEEK_SET);
+        [self logLine:[NSString stringWithFormat:@"set file cursor to: %zd", currentFileSize]];
+        
+        // calculate next read buffer size
+        ssize_t nextReadBufferSize = (fileSize - totalReadBytes > 65535 ? 65535 : fileSize - totalReadBytes);
+        
         // read bytes from file into buffer
-        bytesRead = smb_fread(smbSession, fileDescriptor, readBuffer, 65535);
+        bytesRead = smb_fread(smbSession, fileDescriptor, readBuffer, nextReadBufferSize);
         
         // check if any bytes were read
         if(bytesRead > 0)
         {
-            // append the read buffer into the fileContent result that would be returned
-            [fileContent appendFormat:@"%s", readBuffer];
-            // debug print
-            [self logLine:[NSString stringWithFormat:@"%s\n", readBuffer]];
+            // update the total read bytes counter
+            totalReadBytes = totalReadBytes + nextReadBufferSize;
+            
+            // create a char array in the length of the characters that were read (used for the last read buffer)
+            unichar partialReadBuffer[nextReadBufferSize + 1];
+            
+            // if the current buffer is the last buffer and the read bytes are less then its size (65535), then create an empty new buffer and copy only the read bytes to the new buffer
+            // this way we avoid appending the read bytes **and** the bytes left from the previouse read
+            if(nextReadBufferSize < 65535)
+            {
+                // copy from the original bytesRead char array only the characters that were read (and not the remaining from the previouse read) into the new array
+                memcpy(partialReadBuffer, &readBuffer, nextReadBufferSize);
+                
+                // add the ending null char
+                partialReadBuffer[nextReadBufferSize] = '\0';
+                
+                // create the read buffer as a utf8 string
+                NSString * partialReadString = [[NSString alloc] initWithBytes:partialReadBuffer length:nextReadBufferSize encoding:NSUTF8StringEncoding];
+                
+                // append the read buffer into the fileContent result that would be returned
+                [fileContent appendFormat:@"%@", partialReadString];
+                
+                // debug print
+                [self logLine:[NSString stringWithFormat:@"%@", partialReadString]];
+            }
+            else
+            {
+                // create the read buffer as a utf8 string
+                NSString * readBufferString = [[NSString alloc] initWithBytes:readBuffer length:65535 encoding:NSUTF8StringEncoding];
+
+                // append the read buffer into the fileContent result that would be returned
+                [fileContent appendFormat:@"%@", readBufferString];
+                
+                // debug print
+                [self logLine:[NSString stringWithFormat:@"%@", readBufferString]];
+            }
         }
-    } while (bytesRead > 0);
+    } while (bytesRead > 0 && totalReadBytes < fileSize);
     
     // deallocation - close file
     smb_fclose(smbSession, fileDescriptor);
@@ -282,6 +349,20 @@
     
     // deallocation - destroy the netbios service object since we don't need it anymore
     netbios_ns_destroy(netbiosNameService);
+    
+    // if not all text was read from the file - return an error
+    if(totalReadBytes != fileSize)
+    {
+        // debug print
+        NSString * errorMessageString = [NSString stringWithFormat:@"Failed to read all the content from the file, only succeeded to read: %zd bytes", totalReadBytes];
+        [self logLine:errorMessageString];
+        
+        // return relevant error message
+        NSMutableDictionary* errorMessage = [NSMutableDictionary dictionary];
+        [errorMessage setValue:errorMessageString forKey:NSLocalizedDescriptionKey];
+        *error = [NSError errorWithDomain:@"SMBError" code:-7 userInfo:errorMessage];
+        return NULL;
+    }
     
     // return the read file as a string
     return fileContent;
